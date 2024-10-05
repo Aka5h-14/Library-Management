@@ -19,13 +19,19 @@ The **Library Management System (LMS)** is a web-based application developed usi
 
 ## Database Structure
 
-### Books Table
+### Admin Table
 | Field Name | Type         | Description                  |
 |------------|--------------|------------------------------|
 | ID         | INT          | Auto-incrementing book ID     |
 | NAME       | VARCHAR(40)  | Name of the book              |
 | AUTHOR     | VARCHAR(40)  | Author of the book            |
 | QUANTITY   | MEDIUMINT    | Number of copies available    |
+
+### Books Table
+| Field Name | Type         | Description                  |
+|------------|--------------|------------------------------|
+| Username      | VARCHAR(40)   | User Name                |
+| Password      | VARCHAR(200)  | Password                 |
 
 ### Students Table
 | Field Name | Type         | Description                  |
