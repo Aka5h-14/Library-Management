@@ -408,7 +408,7 @@ def allIssuedBook():
         my_cursor = conn.cursor()
     
         try:
-            query = "SELECT b.NAME AS book_name, b.ID AS book_id, bi.ROLL_NUM AS roll_num, bi.ISSUE_DATE AS issue_date,s.NAME AS student_name FROM BOOKS AS b JOIN BOOKS_ISSUED AS bi ON bi.ID = b.ID JOIN STUDENTS AS s ON bi.ROLL_NUM = s.ROLL_NUM"
+            query = "SELECT b.NAME AS book_name, b.ID AS book_id, bi.ROLL_NUM AS roll_num, bi.ISSUE_DATE AS issue_date,s.NAME AS student_name FROM BOOKS AS b JOIN BOOKS_ISSUED AS bi ON bi.ID = b.ID JOIN STUDENTS AS s ON bi.ROLL_NUM = s.ROLL_NUM order by issue_date"
 
             my_cursor.execute(query)
             issued_books = my_cursor.fetchall()

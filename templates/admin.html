@@ -213,9 +213,9 @@
                 <table class="table table-striped mt-3">
                     <thead>
                         <tr>
-                            <th>Student ID</th>
                             <th>Book ID</th>
                             <th>Book Name</th>
+                            <th>Student Roll Num</th>
                             <th>Author Name</th>
                             <th>Issued Date</th>
                         </tr>
@@ -286,6 +286,9 @@
             const booksContainer = document.getElementById('booksContainer');
             const booksList = document.getElementById('booksList');
 
+            messageDiv.style.display = "none";
+            errorDiv.style.display = "none";
+
             // Clear previous list
             booksList.innerHTML = '';
 
@@ -297,6 +300,16 @@
                     if (!response.ok) throw new Error('Network response was not ok');
 
                     const data = await response.json();
+                    var message = data.message;
+                    var error = data.error;
+                    if (message) {
+                        messageDiv.innerHTML = message;
+                        messageDiv.style.display = "block"
+                    }
+                    if (error) {
+                        errorDiv.innerHTML = error;
+                        errorDiv.style.display = "block"
+                    }
 
                     if (data.books && data.books.length > 0) {
                         data.books.forEach(function (book) {
@@ -329,6 +342,8 @@
             const issuedBooksContainer = document.getElementById('issuedBooksContainer');
             const issuedBooksList = document.getElementById('issuedBooksList');
 
+            messageDiv.style.display = "none";
+            errorDiv.style.display = "none";
             // Clear previous list
             issuedBooksList.innerHTML = '';
 
@@ -340,7 +355,16 @@
                     if (!response.ok) throw new Error('Network response was not ok');
 
                     const data = await response.json();
-
+                    var message = data.message;
+                    var error = data.error;
+                    if (message) {
+                        messageDiv.innerHTML = message;
+                        messageDiv.style.display = "block"
+                    }
+                    if (error) {
+                        errorDiv.innerHTML = error;
+                        errorDiv.style.display = "block"
+                    }
 
                     if (data.issued_books && data.issued_books.length > 0) {
                         data.issued_books.forEach(function (issuedBook) {
@@ -349,7 +373,7 @@
                         <td>${issuedBook[1]}</td> <!-- Book ID -->
                         <td>${issuedBook[0]}</td> <!-- Book Name -->
                         <td>${issuedBook[2]}</td> <!-- Roll Number -->
-                        <td>${issuedBook[4]}</td> <!-- Student Name -->
+                        <td>${issuedBook[4]}</td> <!-- Author Name -->
                         <td>${issuedBook[3]}</td> <!-- Issue Date -->
                     `;
                             issuedBooksList.appendChild(row);
@@ -374,6 +398,9 @@
             const studentsContainer = document.getElementById('studentsContainer');
             const studentsList = document.getElementById('studentsList');
 
+            messageDiv.style.display = "none";
+            errorDiv.style.display = "none";
+
             // Clear previous list
             studentsList.innerHTML = '';
 
@@ -385,6 +412,17 @@
                     if (!response.ok) throw new Error('Network response was not ok');
 
                     const data = await response.json();
+
+                    var message = data.message;
+                    var error = data.error;
+                    if (message) {
+                        messageDiv.innerHTML = message;
+                        messageDiv.style.display = "block"
+                    }
+                    if (error) {
+                        errorDiv.innerHTML = error;
+                        errorDiv.style.display = "block"
+                    }
 
                     if (data.students && data.students.length > 0) {
                         data.students.forEach(function (student) {
@@ -567,6 +605,8 @@
             });
             // Show the selected section
             document.getElementById(sectionId).style.display = 'block';
+            messageDiv.style.display = "none";
+            errorDiv.style.display = "none";
         }
 
     </script>
