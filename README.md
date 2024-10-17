@@ -59,7 +59,7 @@ The **Library Management System (LMS)** is a web-based application developed usi
     ```bash
     python3 -m venv venv
     source venv/bin/activate
-    pip install -r requirements.txt
+    pip3 install -r requirements.txt
     ```
 
 3. Run the application:
