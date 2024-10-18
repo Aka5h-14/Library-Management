@@ -63,8 +63,6 @@
         userTypeSelect.addEventListener('change', function () {
             const selectedValue = this.value;
 
-            adminSection.style.display = 'none';
-
             if (selectedValue === 'admin') {
                 adminSection.style.display = 'block';
             } else if (selectedValue === 'user') {
