@@ -1,10 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for , jsonify 
+from flask import Flask, render_template, request , jsonify 
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import MySQLdb
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime, timedelta
-
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -452,19 +451,16 @@ def add_student():
 
         try:
             query = "INSERT INTO STUDENTS (ROLL_NUM, NAME) VALUES (%s, %s)"
-            my_cursor.execute(query, (roll_num, name))
+            my_cursor.execute(query, (roll_num, name,))
             conn.commit() 
-            message = f"Student {name} with roll number {roll_num} added successfully."
-            return render_template('admin.html', message=message)
+            return jsonify({"message": "Student added successfully!"}), 200
         
         except MySQLdb.Error as err:
-            error_message = f"Error occurred: {err}"
-            return render_template('admin.html', error=error_message)
+            return jsonify({"error": f"Error occurred: {err}"}), 500 
 
         finally:
             my_cursor.close()
 
-    return render_template('admin.html')
 
 @app.route('/deleteStudent', methods=[ 'POST'])
 def delete_student():
@@ -472,28 +468,23 @@ def delete_student():
         conn = mysql.connection
         my_cursor = conn.cursor()
         
-        roll_num = request.form.get("roll_num")
+        roll_num = request.form.get("roll_num2")
 
         try:
-            query = "DELETE FROM STUDENTS WHERE ROLL_NUM = %s"
+            query = "DELETE FROM STUDENTS WHERE ROLL_NUM = %s LIMIT 1"
             my_cursor.execute(query, (roll_num,))
             conn.commit() 
 
             if my_cursor.rowcount == 0:
-                message = "No student found with the given roll number."
-                return render_template('admin.html', message=message)
+                return jsonify({"message": "No student found with the given roll number."}), 404
             
-            message = f"Student with roll number {roll_num} deleted successfully."
-            return render_template('admin.html', message=message)
+            return jsonify({"message": f"Student with roll number {roll_num} deleted successfully."}), 200
         
         except MySQLdb.Error as err:
-            error_message = f"Error occurred: {err}"
-            return render_template('admin.html', error=error_message)
+            return jsonify({"error": f"Error occurred: {err}"}), 500 
 
         finally:
             my_cursor.close()
-
-    return render_template('admin.html')
 
 
 if __name__ == '__main__':

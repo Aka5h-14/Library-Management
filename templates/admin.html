@@ -55,6 +55,8 @@
             <button class="btn btn-info bor" onclick="showSection('updateBookSection')">Update a Book</button>
             <button class="btn btn-info bor" onclick="showSection('booksListSection')">Books List</button>
             <button class="btn btn-info bor" onclick="showSection('issuedBooksSection')">Issued Books</button>
+            <button class="btn btn-info bor" onclick="showSection('addStudentSection')">Add Student</button>
+            <button class="btn btn-info bor" onclick="showSection('deleteStudentSection')">Delete Student</button>
             <button class="btn btn-info bor" onclick="showSection('allStudentsSection')">All Students</button>
         </div>
 
@@ -73,6 +75,7 @@
                 <button type="submit" class="btn btn-primary mt-3">Register</button>
             </form>
         </div>
+
 
         <!-- Add New Book Section -->
         <div id="addBookSection" class="form-section">
@@ -204,7 +207,7 @@
             </div>
         </div>
 
-        <!-- Issue Book Section -->
+        <!-- Issued Book Section -->
         <div id="issuedBooksSection" class="form-section">
             <h1>Issued Books</h1>
             <button id="showIssuedBooksBtn" class="btn btn-primary">Show Issued Books</button>
@@ -227,6 +230,33 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <!-- add and delete student -->
+        <div id="addStudentSection" class="form-section">
+            <h2>Register New Student</h2>
+            <form action="/addStudent" method="post">
+                <div class="form-group">
+                    <label for="Name">Name:</label>
+                    <input type="text" class="form-control" id="Name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="roll_num">Roll Num:</label>
+                    <input type="text" class="form-control" id="Roll" name="roll_num" required>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Register</button>
+            </form>
+        </div>
+
+        <div id="deleteStudentSection" class="form-section">
+            <h2>Delete Student</h2>
+            <form action="/deleteStudent" method="post">
+                <div class="form-group">
+                    <label for="roll_num2">Roll Num:</label>
+                    <input type="text" class="form-control" id="Roll" name="roll_num2" required>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Register</button>
+            </form>
         </div>
 
         <!-- List Student Section -->
@@ -505,6 +535,65 @@
                     console.error('Error:', error);
                 });
         });
+
+        document.getElementById('addStudentSection').addEventListener('submit', function (event) {
+
+            event.preventDefault();
+            messageDiv.style.display = "none";
+            errorDiv.style.display = "none";
+            var formData = new FormData(event.target);
+
+            fetch('/addStudent', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    var message = data.message;
+                    var error = data.error;
+                    if (message) {
+                        messageDiv.innerHTML = message;
+                        messageDiv.style.display = "block"
+                    }
+                    if (error) {
+                        errorDiv.innerHTML = error;
+                        errorDiv.style.display = "block"
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+
+        document.getElementById('deleteStudentSection').addEventListener('submit', function (event) {
+
+            event.preventDefault();
+            messageDiv.style.display = "none";
+            errorDiv.style.display = "none";
+            var formData = new FormData(event.target);
+
+            fetch('/deleteStudent', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    var message = data.message;
+                    var error = data.error;
+                    if (message) {
+                        messageDiv.innerHTML = message;
+                        messageDiv.style.display = "block"
+                    }
+                    if (error) {
+                        errorDiv.innerHTML = error;
+                        errorDiv.style.display = "block"
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+
 
         document.getElementById('addBookSection').addEventListener('submit', function (event) {
 
