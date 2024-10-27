@@ -65,7 +65,9 @@ The **Library Management System (LMS)** is a web-based application developed usi
 3. Run the application:
     ```bash
     flask run
+    ```
     or
+    ```bash
     python app.py
     ```
 
@@ -92,5 +94,5 @@ The **Library Management System (LMS)** is a web-based application developed usi
                                                 |                               |
                                       +---------+---------+          +-----------------------+
                                       |      Books        |          |       Students         |
-                                      +-------------------+          |                       |
+                                      +-------------------+          |                        |
                                                                       +-----------------------+
