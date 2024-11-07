@@ -48,7 +48,7 @@ def logIn():
         
         finally:
             cur.close()
-
+            
 @app.route('/userFunc', methods=['GET'])
 def userFunc():
     return render_template('users.html')
