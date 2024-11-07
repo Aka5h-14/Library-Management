@@ -13,8 +13,8 @@ The **Library Management System (LMS)** is a web-based application developed usi
 
 ## Technologies Used
 - **Flask**: Backend web framework
-- **SQLite**: Database management system
-- **HTML/CSS**: Frontend interface
+- **MYSQL**: Database management system
+- **HTML/CSS/JS**: Frontend interface
 - **Jinja2**: Templating engine for dynamic HTML rendering
 
 ## Database Structure
@@ -66,6 +66,10 @@ The **Library Management System (LMS)** is a web-based application developed usi
     ```bash
     flask run
     ```
+    or
+    ```bash
+    python app.py
+    ```
 
 4. Access the application at `http://127.0.0.1:5000`.
 
@@ -90,41 +94,5 @@ The **Library Management System (LMS)** is a web-based application developed usi
                                                 |                               |
                                       +---------+---------+          +-----------------------+
                                       |      Books        |          |       Students         |
-                                      +-------------------+          |                       |
+                                      +-------------------+          |                        |
                                                                       +-----------------------+
-
-## DFD 1
-      +----------------------------------+
-      |          Admin Login             |
-      |                                  |
-      |  - Input: Username, Password     |
-      |  - Output: Login success/failure |
-      +----------------------------------+
-                    |
-                    v
-      +----------------------------------+
-      |         Manage Books             |
-      |                                  |
-      |  - Add, Update, Delete Books     |
-      +----------------------------------+
-                    |
-                    v
-      +----------------------------------+            +-------------------------+
-      |       Manage Students            |------------|    Issue Books          |
-      |                                  |            |                         |
-      +----------------------------------+            +-------------------------+
-                    |
-                    v
-      +----------------------------------+
-      |        View Issued Books         |
-      +----------------------------------+
-                    |
-                    v
-      +----------------------------------+
-      |          View Books              |
-      +----------------------------------+
-                    |
-                    v
-      +----------------------------------+
-      |        Library Database          |
-      +----------------------------------+
